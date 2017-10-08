@@ -22,7 +22,7 @@ public class GenerateFreeSurferLabelPatch {
 	
 	public Set loadLabel()
 	{
-		String labelFile = "./Data_ISBI2018/AllLabels/lh.precentral.label";
+		String labelFile = "./Data_ISBI2018/AllLabels/lh.superiortemporal.label";
 		int ptNumber = -1;
 		Set ptSet = new HashSet<Integer>();
 		List<String> context = DicccolUtilIO.loadFileToArrayList(labelFile);
@@ -54,7 +54,7 @@ public class GenerateFreeSurferLabelPatch {
 //				System.out.println("Cell-:"+currentCell.cellId+" NO!")
 		}
 		System.out.println(newCells.size());
-		this.surfaceData.writeToVtkFileCompact("./Data_ISBI2018/lh_lh.precentral.label.vtk");
+		this.surfaceData.writeToVtkFileCompact("./Data_ISBI2018/lh_lh.superiortemporal.label.vtk");
 		
 		
 	}
