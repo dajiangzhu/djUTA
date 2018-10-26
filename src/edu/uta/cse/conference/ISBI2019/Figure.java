@@ -9,6 +9,7 @@ import edu.uga.DICCCOL.DicccolUtilIO;
 import edu.uga.liulab.djVtkBase.djVtkPoint;
 import edu.uga.liulab.djVtkBase.djVtkSurData;
 
+//aaa
 public class Figure {
 	List<String> ptFileList;
 	List<String> labelFileList;
