@@ -11,6 +11,7 @@ import edu.uga.liulab.djVtkBase.djVtkSurData;
 
 public class Figure {
 	List<String> ptFileList;
+	List<String> predPtFileList;
 	List<String> labelFileList;
 	double[][] connMatrix;
 	String[] className = {"AD","EMCI","LMCI","Normal","SMC"};
@@ -20,6 +21,7 @@ public class Figure {
 	public void loadData(String DirInput, String filePre)
 	{
 		ptFileList = DicccolUtilIO.loadFileToArrayList(DirInput+"\\"+filePre+"Pt.txt");
+		predPtFileList = DicccolUtilIO.loadFileToArrayList(DirInput+"\\"+filePre+"PrePts.txt");
 		labelFileList = DicccolUtilIO.loadFileToArrayList(DirInput+"\\"+filePre+"Label.txt");
 		AllPts = new ArrayList<djVtkPoint>();
 		ClassPts = new ArrayList<List<djVtkPoint>>();
@@ -28,6 +30,7 @@ public class Figure {
 	public void generateDataPts(String DirOutput,String filePre)
 	{
 		int dataClass = 5;
+		AllPts.clear();
 		
 		for(int i=0;i<dataClass;i++)
 		{
@@ -53,7 +56,25 @@ public class Figure {
 			NewPtVtk.points.addAll(ClassPts.get(i));
 			NewPtVtk.writePtsToVtkFile(DirOutput+"\\"+filePre+"_"+className[i]+"_Pts.vtk");
 		}
+	}
+	
+	public void generatePrePts(String DirOutput,String filePre)
+	{
+		AllPts.clear();
 		
+		String[] tmpArrayX = predPtFileList.get(0).split(",");
+		String[] tmpArrayY = predPtFileList.get(1).split(",");
+		String[] tmpArrayZ = predPtFileList.get(2).split(",");
+		for(int i=0;i<tmpArrayX.length;i++)
+		{
+			int ptID = i;
+			djVtkPoint newPt = new djVtkPoint(ptID,Float.valueOf(tmpArrayX[i].trim()),Float.valueOf(tmpArrayY[i].trim()),Float.valueOf(tmpArrayZ[i].trim()));
+			AllPts.add(newPt);
+		}
+			djVtkSurData NewPtVtk = new djVtkSurData();
+			NewPtVtk.nPointNum = AllPts.size();
+			NewPtVtk.points.addAll(AllPts);
+			NewPtVtk.writePtsToVtkFile(DirOutput+"\\"+filePre+"_Predict_Pts.vtk");
 	}
 	
 	public void generateLines(String DirInput, String DirOutput,String filePre) throws IOException
@@ -84,8 +105,8 @@ public class Figure {
 
 	public static void main(String[] args) throws IOException {
 		Figure mainHandler = new Figure();
-		String DirInput = "C:\\D_Drive\\2018ISBI\\all_116feature_tsne\\all_116feature_tsne";
-		String DirOutput = "C:\\D_Drive\\2018ISBI\\all_116feature_tsne\\vtk";
+		String DirInput = "C:\\D_Drive\\2018ISBI\\proposal\\LMCI new patient prediction";
+		String DirOutput = "C:\\D_Drive\\2018ISBI\\proposal\\LMCI new patient prediction\\vtk";
 //		for(int r=1;r<117;r++)
 //		{
 //			System.out.println("Region-"+r+"-------------------------");
@@ -95,18 +116,23 @@ public class Figure {
 //			mainHandler.generateLines(DirInput, DirOutput, filePre);
 //		}
 //		
-		for(int g=1;g<8;g++)
-		{
-			System.out.println("Group-"+g+"-------------------------");
-			int start = (g-1)*20+1;
-			int end = start+19;
-			String filePre = "group"+g+"_time"+start+"to"+end+"_";
-			mainHandler.loadData(DirInput, filePre);
-			mainHandler.generateDataPts(DirOutput, filePre);
-			mainHandler.generateLines(DirInput, DirOutput, filePre);
-		}
-		
+//		for(int g=1;g<8;g++)
+//		{
+//			System.out.println("Group-"+g+"-------------------------");
+//			int start = (g-1)*20+1;
+//			int end = start+19;
+//			String filePre = "group"+g+"_time"+start+"to"+end+"_";
+//			mainHandler.loadData(DirInput, filePre);
+//			mainHandler.generateDataPts(DirOutput, filePre);
+//			mainHandler.generateLines(DirInput, DirOutput, filePre);
+//		}
 		//group1_time1to20_Pt
+		int subID = 50;
+		String filePre = subID + "_data-group4-simple_";
+		mainHandler.loadData(DirInput, filePre);
+		mainHandler.generateDataPts(DirOutput, filePre);
+		mainHandler.generatePrePts(DirOutput, filePre);
+		mainHandler.generateLines(DirInput, DirOutput, filePre);
 
 
 	}
