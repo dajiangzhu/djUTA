@@ -39,22 +39,22 @@ public class GenerateConn {
 
 	public void loadDataForStrucConn() {
 		// load the info of all labels
-		 labelDic = DicccolUtilIO.loadFileAsStringArray(rootDIR + "/aparc.annot.ctab",
-		 34, 6);
-//		labelDic = DicccolUtilIO.loadFileAsStringArray(rootDIR + "\\aparc.annot.ctab", 34, 6);
+		labelDic = DicccolUtilIO.loadFileAsStringArray(rootDIR + "/aparc.annot.ctab", 34, 6);
+		// labelDic = DicccolUtilIO.loadFileAsStringArray(rootDIR +
+		// "\\aparc.annot.ctab", 34, 6);
 
 		// load surface (left and right) and fiber data
-		 surDataL = new djVtkSurData(rootDIR + "/" + this.subID +
-		 "/Surf/vtk/lh."+this.surface+"_transform.vtk");
-		 surDataR = new djVtkSurData(rootDIR + "/" + this.subID +
-		 "/Surf/vtk/rh."+this.surface+"_transform.vtk");
-//		surDataL = new djVtkSurData(rootDIR + "\\" + this.subID + "\\Surf\\vtk\\lh.pial_transform.vtk");
-//		surDataR = new djVtkSurData(rootDIR + "\\" + this.subID + "\\Surf\\vtk\\rh.pial_transform.vtk");
-		 fiberData = new djVtkFiberData(
-		 rootDIR + "/" + this.subID +
-		 "/Fiber/preprocessing/fiber/MedINRIA_StreamLine/fiber.asc.vtk");
-//		fiberData = new djVtkFiberData(
-//				rootDIR + "\\" + this.subID + "\\Fiber\\preprocessing\\fiber\\MedINRIA_StreamLine\\fiber.asc.vtk");
+		surDataL = new djVtkSurData(rootDIR + "/" + this.subID + "/Surf/vtk/lh." + this.surface + "_transform.vtk");
+		surDataR = new djVtkSurData(rootDIR + "/" + this.subID + "/Surf/vtk/rh." + this.surface + "_transform.vtk");
+		// surDataL = new djVtkSurData(rootDIR + "\\" + this.subID +
+		// "\\Surf\\vtk\\lh.pial_transform.vtk");
+		// surDataR = new djVtkSurData(rootDIR + "\\" + this.subID +
+		// "\\Surf\\vtk\\rh.pial_transform.vtk");
+		fiberData = new djVtkFiberData(
+				rootDIR + "/" + this.subID + "/Fiber/preprocessing/fiber/MedINRIA_StreamLine/fiber.asc.vtk");
+		// fiberData = new djVtkFiberData(
+		// rootDIR + "\\" + this.subID +
+		// "\\Fiber\\preprocessing\\fiber\\MedINRIA_StreamLine\\fiber.asc.vtk");
 
 		// matching the surface and fiber
 		hybridDataL = new djVtkHybridData(surDataL, fiberData);
@@ -68,21 +68,21 @@ public class GenerateConn {
 		for (int i = 0; i < NumOfLabel; i++) {
 			String lableName = labelDic[i][1];
 			List<Integer> ptsInLable_L = new ArrayList<Integer>();
-			 List<String> labelInfo_L = DicccolUtilIO
-			 .loadFileToArrayList(rootDIR + "/AllROILabels/" + this.subID + "/lh." +
-			 lableName + ".label");
-//			List<String> labelInfo_L = DicccolUtilIO
-//					.loadFileToArrayList(rootDIR + "\\AllROILabels\\" + this.subID + "\\lh." + lableName + ".label");
+			List<String> labelInfo_L = DicccolUtilIO
+					.loadFileToArrayList(rootDIR + "/AllROILabels/" + this.subID + "/lh." + lableName + ".label");
+			// List<String> labelInfo_L = DicccolUtilIO
+			// .loadFileToArrayList(rootDIR + "\\AllROILabels\\" + this.subID + "\\lh." +
+			// lableName + ".label");
 			for (int j = 2; j < labelInfo_L.size(); j++)
 				ptsInLable_L.add(Integer.valueOf(labelInfo_L.get(j).trim().split("\\s+")[0]));
 			mapLabelPoints.put(lableName + "_L", ptsInLable_L);
 
 			List<Integer> ptsInLable_R = new ArrayList<Integer>();
-			 List<String> labelInfo_R = DicccolUtilIO
-			 .loadFileToArrayList(rootDIR + "/AllROILabels/" + this.subID + "/rh." +
-			 lableName + ".label");
-//			List<String> labelInfo_R = DicccolUtilIO
-//					.loadFileToArrayList(rootDIR + "\\AllROILabels\\" + this.subID + "\\rh." + lableName + ".label");
+			List<String> labelInfo_R = DicccolUtilIO
+					.loadFileToArrayList(rootDIR + "/AllROILabels/" + this.subID + "/rh." + lableName + ".label");
+			// List<String> labelInfo_R = DicccolUtilIO
+			// .loadFileToArrayList(rootDIR + "\\AllROILabels\\" + this.subID + "\\rh." +
+			// lableName + ".label");
 			for (int j = 2; j < labelInfo_R.size(); j++)
 				ptsInLable_R.add(Integer.valueOf(labelInfo_R.get(j).trim().split("\\s+")[0]));
 			mapLabelPoints.put(lableName + "_R", ptsInLable_R);
@@ -104,41 +104,40 @@ public class GenerateConn {
 
 	public void loadDataForFunctionalConn() {
 		// load the info of all labels
-		 labelDic = DicccolUtilIO.loadFileAsStringArray(rootDIR + "/aparc.annot.ctab",
-		 34, 6);
-//		labelDic = DicccolUtilIO.loadFileAsStringArray(rootDIR + "\\aparc.annot.ctab", 34, 6);
+		labelDic = DicccolUtilIO.loadFileAsStringArray(rootDIR + "/aparc.annot.ctab", 34, 6);
+		// labelDic = DicccolUtilIO.loadFileAsStringArray(rootDIR +
+		// "\\aparc.annot.ctab", 34, 6);
 
-//		 load surface (left and right) and fiber data
-		 surDataL = new djVtkSurData(rootDIR + "/" + this.subID +
-		 "/Surf/vtk/lh."+this.surface+"_transform.vtk");
-		 surDataR = new djVtkSurData(rootDIR + "/" + this.subID +
-		 "/Surf/vtk/rh."+this.surface+"_transform.vtk");
-			rsData = new djNiftiData(
-					rootDIR + "/" + this.subID + "/fMRI/rsfProcess/bolds_fmri2dti.nii.gz");
-//		surDataL = new djVtkSurData(rootDIR + "\\" + this.subID + "\\Surf\\vtk\\lh.pial_transform.vtk");
-//		surDataR = new djVtkSurData(rootDIR + "\\" + this.subID + "\\Surf\\vtk\\rh.pial_transform.vtk");
-//		rsData = new djNiftiData(
-//				rootDIR + "\\" + this.subID + "\\fMRI\\rsfProcess\\bolds_fmri2dti.nii.gz");
+		// load surface (left and right) and fiber data
+		surDataL = new djVtkSurData(rootDIR + "/" + this.subID + "/Surf/vtk/lh." + this.surface + "_transform.vtk");
+		surDataR = new djVtkSurData(rootDIR + "/" + this.subID + "/Surf/vtk/rh." + this.surface + "_transform.vtk");
+		rsData = new djNiftiData(rootDIR + "/" + this.subID + "/fMRI/rsfProcess/bolds_fmri2dti.nii.gz");
+		// surDataL = new djVtkSurData(rootDIR + "\\" + this.subID +
+		// "\\Surf\\vtk\\lh.pial_transform.vtk");
+		// surDataR = new djVtkSurData(rootDIR + "\\" + this.subID +
+		// "\\Surf\\vtk\\rh.pial_transform.vtk");
+		// rsData = new djNiftiData(
+		// rootDIR + "\\" + this.subID + "\\fMRI\\rsfProcess\\bolds_fmri2dti.nii.gz");
 
 		// load info of points in each label
 		for (int i = 0; i < NumOfLabel; i++) {
 			String lableName = labelDic[i][1];
 			List<Integer> ptsInLable_L = new ArrayList<Integer>();
-			 List<String> labelInfo_L = DicccolUtilIO
-			 .loadFileToArrayList(rootDIR + "/AllROILabels/" + this.subID + "/lh." +
-			 lableName + ".label");
-//			List<String> labelInfo_L = DicccolUtilIO
-//					.loadFileToArrayList(rootDIR + "\\AllROILabels\\" + this.subID + "\\lh." + lableName + ".label");
+			List<String> labelInfo_L = DicccolUtilIO
+					.loadFileToArrayList(rootDIR + "/AllROILabels/" + this.subID + "/lh." + lableName + ".label");
+			// List<String> labelInfo_L = DicccolUtilIO
+			// .loadFileToArrayList(rootDIR + "\\AllROILabels\\" + this.subID + "\\lh." +
+			// lableName + ".label");
 			for (int j = 2; j < labelInfo_L.size(); j++)
 				ptsInLable_L.add(Integer.valueOf(labelInfo_L.get(j).trim().split("\\s+")[0]));
 			mapLabelPoints.put(lableName + "_L", ptsInLable_L);
 
 			List<Integer> ptsInLable_R = new ArrayList<Integer>();
-			 List<String> labelInfo_R = DicccolUtilIO
-			 .loadFileToArrayList(rootDIR + "/AllROILabels/" + this.subID + "/rh." +
-			 lableName + ".label");
-//			List<String> labelInfo_R = DicccolUtilIO
-//					.loadFileToArrayList(rootDIR + "\\AllROILabels\\" + this.subID + "\\rh." + lableName + ".label");
+			List<String> labelInfo_R = DicccolUtilIO
+					.loadFileToArrayList(rootDIR + "/AllROILabels/" + this.subID + "/rh." + lableName + ".label");
+			// List<String> labelInfo_R = DicccolUtilIO
+			// .loadFileToArrayList(rootDIR + "\\AllROILabels\\" + this.subID + "\\rh." +
+			// lableName + ".label");
 			for (int j = 2; j < labelInfo_R.size(); j++)
 				ptsInLable_R.add(Integer.valueOf(labelInfo_R.get(j).trim().split("\\s+")[0]));
 			mapLabelPoints.put(lableName + "_R", ptsInLable_R);
@@ -196,7 +195,7 @@ public class GenerateConn {
 
 		for (int i = 0; i < NumOfLabel; i++) { // NumOfLabel=34
 			String lableName = labelDic[i][1];
-//			System.out.println(lableName+"_L");
+			System.out.println(lableName + "_L");
 			// get all points within this label area
 			Set<djVtkPoint> tmpPointsL = new HashSet<djVtkPoint>();
 			for (int p = 0; p < this.mapLabelPoints.get(lableName + "_L").size(); p++)
@@ -205,8 +204,8 @@ public class GenerateConn {
 		} // for NumOfLabel=34
 
 		for (int i = NumOfLabel; i < NumOfLabel * 2; i++) { // NumOfLabel=34
-			String lableName = labelDic[i-NumOfLabel][1];
-//			System.out.println(lableName+"_R");
+			String lableName = labelDic[i - NumOfLabel][1];
+			// System.out.println(lableName+"_R");
 			// get all points within this label area
 			Set<djVtkPoint> tmpPointsR = new HashSet<djVtkPoint>();
 			for (int p = 0; p < this.mapLabelPoints.get(lableName + "_R").size(); p++)
@@ -220,6 +219,26 @@ public class GenerateConn {
 			for (int j = i + 1; j < NumOfROI; j++)
 				functionalConnectivityMatrix[i][j] = functionalConnectivityMatrix[j][i] = correlationHandler
 						.Correlation_Pearsons(allBold[i], allBold[j]);
+	}
+
+	public void test() {
+		djVtkPoint tmpPoint = this.surDataL.getPoint(99501);
+		int[] volumeCoord;
+		float[] physicalCoord = new float[3];
+		physicalCoord[0] = tmpPoint.x;
+		physicalCoord[1] = tmpPoint.y;
+		physicalCoord[2] = tmpPoint.z;
+		volumeCoord = rsData.convertFromPhysicalToVolume(physicalCoord);
+		System.out.println("x-" + volumeCoord[0] + "  y-" + volumeCoord[1] + "  z-" + volumeCoord[2]);
+
+		double[] boldsSig = new double[this.rsData.tSize];
+		for (int t = 0; t < this.rsData.tSize; t++)
+		{
+			//boldsSig[t] = this.rsData.getValueBasedOnPhysicalCoordinate(tmpPoint.x, tmpPoint.y, tmpPoint.z, t);
+			boldsSig[t] = this.rsData.getValueBasedOnVolumeCoordinate(99, 66, 51, t);
+			System.out.println("t-"+t+": "+boldsSig[t]);
+		}
+
 	}
 
 	public static void main(String[] args) {
@@ -237,19 +256,26 @@ public class GenerateConn {
 			mainHandler.loadDataForStrucConn();
 			mainHandler.generateStructuralConn();
 			DicccolUtilIO.writeVtkMatrix1(mainHandler.structuralConnectivityMatrix, mainHandler.NumOfROI,
-					mainHandler.NumOfROI,
-					mainHandler.rootDIR + "/" + mainHandler.subID + "/" + mainHandler.subID + "."+mainHandler.surface+".StruConn.vtk");
-			DicccolUtilIO.writeArrayToFile(mainHandler.structuralConnectivityMatrix, mainHandler.NumOfROI, mainHandler.NumOfROI, ",", mainHandler.rootDIR + "/" + mainHandler.subID + "/" + mainHandler.subID + "."+mainHandler.surface+".StruConn.txt");
-			
+					mainHandler.NumOfROI, mainHandler.rootDIR + "/" + mainHandler.subID + "/" + mainHandler.subID + "."
+							+ mainHandler.surface + ".StruConn.vtk");
+			DicccolUtilIO.writeArrayToFile(mainHandler.structuralConnectivityMatrix, mainHandler.NumOfROI,
+					mainHandler.NumOfROI, ",", mainHandler.rootDIR + "/" + mainHandler.subID + "/" + mainHandler.subID
+							+ "." + mainHandler.surface + ".StruConn.txt");
+
 		} else if (args[3].trim().equals("functional")) {
 			mainHandler.loadDataForFunctionalConn();
-			mainHandler.generateFunctionalConn();
-			DicccolUtilIO.writeVtkMatrix1(mainHandler.functionalConnectivityMatrix, mainHandler.NumOfROI,
-					mainHandler.NumOfROI,
-					mainHandler.rootDIR + "/" + mainHandler.subID + "/" + mainHandler.subID + "."+mainHandler.surface+".FunConn.vtk");
-			DicccolUtilIO.writeArrayToFile(mainHandler.functionalConnectivityMatrix, mainHandler.NumOfROI,
-					mainHandler.NumOfROI, ",",
-					mainHandler.rootDIR + "/" + mainHandler.subID + "/" + mainHandler.subID + "."+mainHandler.surface+".FunConn.txt");
+			mainHandler.test();
+			// mainHandler.generateFunctionalConn();
+			// DicccolUtilIO.writeVtkMatrix1(mainHandler.functionalConnectivityMatrix,
+			// mainHandler.NumOfROI,
+			// mainHandler.NumOfROI,
+			// mainHandler.rootDIR + "/" + mainHandler.subID + "/" + mainHandler.subID +
+			// "."+mainHandler.surface+".FunConn.vtk");
+			// DicccolUtilIO.writeArrayToFile(mainHandler.functionalConnectivityMatrix,
+			// mainHandler.NumOfROI,
+			// mainHandler.NumOfROI, ",",
+			// mainHandler.rootDIR + "/" + mainHandler.subID + "/" + mainHandler.subID +
+			// "."+mainHandler.surface+".FunConn.txt");
 		} else
 			System.out.println("Need Para:SubID structural/functional");
 
