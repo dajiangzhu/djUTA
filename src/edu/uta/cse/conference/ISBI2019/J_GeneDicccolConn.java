@@ -4,7 +4,6 @@ import edu.uga.DICCCOL.DicccolConnectivityService;
 import edu.uga.DICCCOL.DicccolUtilIO;
 import edu.uga.liulab.djVtkBase.djNiftiData;
 import edu.uga.liulab.djVtkBase.djVtkFiberData;
-import edu.uga.liulab.djVtkBase.djVtkHybridData;
 import edu.uga.liulab.djVtkBase.djVtkSurData;
 
 public class J_GeneDicccolConn {
@@ -16,6 +15,7 @@ public class J_GeneDicccolConn {
 	
 	public void loadData(String surFileName, String fibFileName, String rsfMRIFileName, String predDicccolFileName)
 	{
+		//
 		surData = new djVtkSurData(surFileName);
 		fiberData = new djVtkFiberData(fibFileName);
 		rsData = new djNiftiData(rsfMRIFileName);
