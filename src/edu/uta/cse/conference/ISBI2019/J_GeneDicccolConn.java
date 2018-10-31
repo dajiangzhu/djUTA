@@ -43,6 +43,9 @@ public class J_GeneDicccolConn {
 		String rsfMRIFileName = args[2].trim();
 		String predDicccolFileName = args[3].trim();
 		String saveFilePre = args[4].trim();
+		
+		mainHandler.loadData(surFileName, fibFileName, rsfMRIFileName, predDicccolFileName);
+		mainHandler.saveDicccolPtVtk(saveFilePre);
 
 	}
 
