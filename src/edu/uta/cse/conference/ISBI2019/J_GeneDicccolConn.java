@@ -30,6 +30,13 @@ public class J_GeneDicccolConn {
 	{
 		DicccolUtilIO.writeToPointsVtkFile(saveFilePre+".DicccolPts.vtk", dicccolConnService.getDicccolPts());
 	}
+	
+	public void saveDicccolStructuralConn(String saveFilePre)
+	{
+		double[][] structuralConn = dicccolConnService.getStructuralConnectivityMatrix();
+		DicccolUtilIO.writeArrayToFile(structuralConn, 358, 358, " ", saveFilePre+".DicccolStructuralConn.txt");
+		DicccolUtilIO.writeVtkMatrix1(structuralConn, 358, 358, saveFilePre+".DicccolStructuralConn.vtk");
+	}
 
 	public static void main(String[] args) {
 		if(args.length!=5)
