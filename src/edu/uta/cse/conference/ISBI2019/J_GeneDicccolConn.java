@@ -37,6 +37,13 @@ public class J_GeneDicccolConn {
 		DicccolUtilIO.writeArrayToFile(structuralConn, 358, 358, " ", saveFilePre+".DicccolStructuralConn.txt");
 		DicccolUtilIO.writeVtkMatrix1(structuralConn, 358, 358, saveFilePre+".DicccolStructuralConn.vtk");
 	}
+	
+	public void saveDicccolFunctionalConn(String saveFilePre)
+	{
+		double[][] functionalConn = dicccolConnService.getFunctionalconnectivityMatrix();
+		DicccolUtilIO.writeArrayToFile(functionalConn, 358, 358, " ", saveFilePre+".DicccolFunctionalConn.txt");
+		DicccolUtilIO.writeVtkMatrix1(functionalConn, 358, 358, saveFilePre+".DicccolFunctionalConn.vtk");
+	}
 
 	public static void main(String[] args) {
 		if(args.length!=5)
@@ -53,6 +60,8 @@ public class J_GeneDicccolConn {
 		
 		mainHandler.loadData(surFileName, fibFileName, rsfMRIFileName, predDicccolFileName);
 		mainHandler.saveDicccolPtVtk(saveFilePre);
+		mainHandler.saveDicccolStructuralConn(saveFilePre);
+		mainHandler.saveDicccolFunctionalConn(saveFilePre);
 
 	}
 
