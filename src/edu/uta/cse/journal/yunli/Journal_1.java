@@ -17,8 +17,12 @@ public class Journal_1 {
 	private List<String> preprocessingPairList(List<String> oriList)
 	{
 		List<String> processedList = new ArrayList<String>();
-		
-		for (int i = 0; i < oriList.size(); i++) {
+		if(this.numOfTopConn>oriList.size())
+		{
+			System.out.println("The N you input is too large!");
+			System.exit(0);
+		}
+		for (int i = 0; i < this.numOfTopConn; i++) {
 			String[] currentLine = oriList.get(i).trim().split("-");
 			int dicccol_from = Integer.valueOf(currentLine[0].trim());
 			int dicccol_to = Integer.valueOf(currentLine[1].trim());
