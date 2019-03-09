@@ -36,7 +36,7 @@ public class Journal_1 {
 		List<String> oriList = DicccolUtilIO.loadFileToArrayList(connPairFile);
 		List<String> processedList = this.preprocessingPairList(oriList);
 		GenerateDICCCOL generateDicccolService = new GenerateDICCCOL(surfaceSmoothFile, predictedDicccolFile, 0,
-				connPairFile+"_conn.vtk");
+				connPairFile+"_connTop"+this.numOfTopConn+".vtk");
 		generateDicccolService.setDicccolConnList(processedList);
 		generateDicccolService.generateConnVtk();
 	}
