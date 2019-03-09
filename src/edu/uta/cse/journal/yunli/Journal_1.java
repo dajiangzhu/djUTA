@@ -37,7 +37,7 @@ public class Journal_1 {
 		generateDicccolService.generateConnVtk();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Journal_1 mainHandler = new Journal_1();
 		
 		if(args.length!=2)
@@ -49,6 +49,7 @@ public class Journal_1 {
 		mainHandler.predictedDicccolFile = "./Dicccol.roi.allMat.txt";
 		mainHandler.connPairFile = args[0].trim();
 		mainHandler.numOfTopConn = Integer.valueOf(args[1].trim());
+		mainHandler.generateDicccolConn();
 
 	}
 
