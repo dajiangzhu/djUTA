@@ -14,20 +14,26 @@ public class Journal_1 {
 	String connPairFile = "";
 	int numOfTopConn = -1;
 	
-	private List<String> preprocessingPairList()
+	private List<String> preprocessingPairList(List<String> oriList)
 	{
 		List<String> processedList = new ArrayList<String>();
 		
-		
+		for (int i = 0; i < oriList.size(); i++) {
+			String[] currentLine = oriList.get(i).trim().split("-");
+			int dicccol_from = Integer.valueOf(currentLine[0].trim());
+			int dicccol_to = Integer.valueOf(currentLine[1].trim());
+			processedList.add((dicccol_from-1)+"-"+(dicccol_to-1));
+		}
 		return processedList;
 	}
 	
 	public void generateDicccolConn () throws IOException
 	{
-		List<String> outputList = DicccolUtilIO.loadFileToArrayList(connPairFile);
+		List<String> oriList = DicccolUtilIO.loadFileToArrayList(connPairFile);
+		List<String> processedList = this.preprocessingPairList(oriList);
 		GenerateDICCCOL generateDicccolService = new GenerateDICCCOL(surfaceSmoothFile, predictedDicccolFile, 0,
 				connPairFile+"_conn.vtk");
-		generateDicccolService.setDicccolConnList(outputList);
+		generateDicccolService.setDicccolConnList(processedList);
 		generateDicccolService.generateConnVtk();
 	}
 
