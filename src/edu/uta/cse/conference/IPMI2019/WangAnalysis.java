@@ -27,7 +27,7 @@ public class WangAnalysis {
 	public void loadData(String DirInput, String methodType, String connType)
 	{
 		ptFileList = DicccolUtilIO.loadFileToArrayList(DirInput+"\\"+methodType+"\\"+connType+"_pt.txt");
-		labelFileList = DicccolUtilIO.loadFileToArrayList(DirInput+"\\sub_label.txt");
+		labelFileList = DicccolUtilIO.loadFileToArrayList(DirInput+"\\sub_label_1_4.txt");
 		classColor = DicccolUtilIO.loadFileToArrayList(DirInput+"\\ColorDictionary.txt");
 		AllPts = new ArrayList<djVtkPoint>();
 		ClassPts = new ArrayList<List<djVtkPoint>>();
@@ -114,8 +114,12 @@ public class WangAnalysis {
 
 	public static void main(String[] args) throws IOException {
 		WangAnalysis mainHandler = new WangAnalysis();
-		String methodType = "multiview-white";
-		String connType = "func";
+//		String methodType = "multiview-white";
+//		String connType = "func";
+//		String DirInput = "C:\\D_Drive\\2019IPMI\\MultiViewResult";
+		
+		String methodType = "multiview-white\\multiview_1_4";
+		String connType = "struc";
 		String DirInput = "C:\\D_Drive\\2019IPMI\\MultiViewResult";
 		
 		mainHandler.loadData(DirInput, methodType, connType);

@@ -97,10 +97,31 @@ public class test1 {
 		System.out.println("t1ToDTIData.Spacing:"+t1ToDTIData.Spacing[0]+"  "+t1ToDTIData.Spacing[1]+"   "+t1ToDTIData.Spacing[2]);
 	}
 	
+	public void testMem()
+	{
+		float[][][][] tmp = new float[145][435][532][150];
+		float count = 0.0f;
+		for(int i=0;i<145;i++)
+			for(int j=0;j<435;j++)
+				for(int k=0;k<532;k++)
+					for(int l=0;l<150;l++)
+						tmp[i][j][k][l] = count++;
+		
+		for(int i=0;i<145;i++)
+			for(int j=0;j<435;j++)
+				for(int k=0;k<532;k++)
+					for(int l=0;l<150;l++)
+						System.out.println("tmp["+i+"]["+j+"]["+k+"]["+l+"]: "+ tmp[i][j][k][l]);
+						
+						
+		
+	}
+	
 	public static void main(String[] args) {
 		test1 mainHandler = new test1();
 //		mainHandler.testFreeSurferSurMapping();
-		mainHandler.testAccessT1();
+//		mainHandler.testAccessT1();
+		mainHandler.testMem();
 		
 
 	}

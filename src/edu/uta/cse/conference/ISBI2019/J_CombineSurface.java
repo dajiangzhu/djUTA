@@ -1,5 +1,8 @@
 package edu.uta.cse.conference.ISBI2019;
 
+import java.util.Iterator;
+import java.util.List;
+
 import edu.uga.liulab.djVtkBase.djVtkSurData;
 
 public class J_CombineSurface {
@@ -31,6 +34,16 @@ public class J_CombineSurface {
 		surData1.nPointNum = surData1.nPointNum + surData2.nPointNum;
 		surData1.nCellNum = surData1.nCellNum + surData2.nCellNum;
 		surData1.cellsOutput.addAll(surData1.getAllCells());
+		if (surData1.pointsScalarData.size() > 0) {
+			Iterator iterCellData = surData1.pointsScalarData.keySet().iterator();
+			while (iterCellData.hasNext()) {
+				String tmpAttriName = (String) iterCellData.next();
+				List<String> newAttriList = surData1.pointsScalarData.get(tmpAttriName);
+				newAttriList.addAll(surData2.pointsScalarData.get(tmpAttriName));
+				surData1.pointsScalarData.remove(tmpAttriName);
+				surData1.pointsScalarData.put(tmpAttriName, newAttriList);
+				}
+			}
 		surData1.writeToVtkFile(ourPutSur);
 	}
 
