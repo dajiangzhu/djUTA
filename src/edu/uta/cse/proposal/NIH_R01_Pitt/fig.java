@@ -216,7 +216,7 @@ public class fig {
 			NewPtVtk.nPointNum = currentSelectPtList.size();
 			NewPtVtk.points.addAll(currentSelectPtList);
 			NewPtVtk.writePtsToVtkFile(DirInput+"/"+fileOutputString+"_"+uniqueLabels.get(i)+"_SelectedPts.vtk");
-		}
+		} 
 	}
 
 	public static void main(String[] args) throws IOException {
